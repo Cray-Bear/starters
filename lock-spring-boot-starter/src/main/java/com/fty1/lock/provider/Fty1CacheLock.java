@@ -5,6 +5,7 @@ import com.fty1.lock.Fty1Lock;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.util.StringUtils;
 
 import java.util.concurrent.TimeUnit;
 
@@ -16,6 +17,8 @@ public class Fty1CacheLock implements Fty1Lock {
 
     private StringRedisTemplate redisTemplate;
 
+
+    private String  key;
 
     public Fty1CacheLock(StringRedisTemplate redisTemplate) {
         this.redisTemplate = redisTemplate;
@@ -45,11 +48,21 @@ public class Fty1CacheLock implements Fty1Lock {
     public boolean tryLock(@NonNull String key, long timeout, @NonNull TimeUnit unit) {
         long time = Fty1DateUtils.toSeconds(timeout, unit);
         try {
-            return redisTemplate.execute(connection -> connection.setEx(key.getBytes(),time,key.getBytes()), true);
+            boolean res = redisTemplate.execute(connection -> connection.setEx(key.getBytes(), time, key.getBytes()), true);
+            if (res) {
+
+                this.key = key;
+
+                log.info("加锁成功");
+            }
+            return res;
         } catch (Exception e) {
-            log.info("加锁失败",e);
-            return unLock(key);
+            log.info("加锁失败", e);
+            //log.info("加锁失败");
+            //unLock(key);
         }
+
+        return false;
     }
 
 
@@ -66,7 +79,7 @@ public class Fty1CacheLock implements Fty1Lock {
 //        RedisCallback<Boolean> redisCallback = connection -> connection.setEx(lock.getBytes(), expireTime, lock.getBytes());
 //        //return redisTemplate.execute(redisCallback);
 //        redisTemplate.expire()
-        return tryLock(lock,expireTime,TimeUnit.SECONDS);
+        return tryLock(lock, expireTime, TimeUnit.SECONDS);
     }
 
     /**
@@ -74,18 +87,10 @@ public class Fty1CacheLock implements Fty1Lock {
      * @return
      */
     @Override
-    public boolean unLock(String key) {
-        log.info("尝试删除锁-key:{}", key);
-//        if (redisTemplate.delete(key)) {
-//            return true;
-//        }
-//
-//        log.info("尝试删除锁-失败-key:{}", key);
-//        while (redisTemplate.hasKey(key)) {
-//            log.info("尝试删除锁-失败-存在锁-key:{}", key);
-//            //保证一定删除掉
-//            unLock(key);
-//        }
-        return redisTemplate.delete(key);
+    public void unLock() {
+        log.info("尝试删除锁-key:{}", this.key);
+        if(!StringUtils.isEmpty(key)){
+            redisTemplate.delete(key);
+        }
     }
 }

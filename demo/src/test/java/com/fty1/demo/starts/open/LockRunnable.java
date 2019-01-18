@@ -28,30 +28,31 @@ public class LockRunnable implements Runnable {
         try {
             System.out.println(name + " 准备好了...");
             barrier.await();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (BrokenBarrierException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+          log.info("CyclicBarrier Exception");
         }
+
         System.out.println(name + " 起跑！");
 
 
         log.info("开始:{}", Thread.currentThread().getName());
         Fty1CacheLock lock = fty1LockFactory.buildFty1CacheLock();
         String key = "LOCK."+System.currentTimeMillis();
+        log.info("UNLOCKED:{}-key:{}", Thread.currentThread().getName(),key);
         if (lock.tryLock(key, 3)) {
             System.out.println(name + " 获得锁...");
             try {
                 System.out.println("业务执行。。。。。");
+                System.out.println(name + " 到达终点!");
             } catch (Exception e) {
-                e.printStackTrace();
+                log.info("CyclicBarrier Exception",e);
             } finally {
                 log.info("UNLOCKED:{}", Thread.currentThread().getName());
                 lock.unLock(key);
                 log.info("UNLOCKED:{}", Thread.currentThread().getName());
             }
         }
-        System.out.println(name + " 到达终点!");
+
     }
 
 }
