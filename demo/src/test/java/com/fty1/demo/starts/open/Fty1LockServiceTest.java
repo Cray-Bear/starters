@@ -27,11 +27,11 @@ public class Fty1LockServiceTest extends DemoApplicationTests {
 
         boolean res = lock.tryLock("789789798789");
         System.out.println(res);
-        CyclicBarrier barrier = new CyclicBarrier(5);
+        CyclicBarrier barrier = new CyclicBarrier(1000);
 
         ExecutorService executor = Executors.newFixedThreadPool(1000);
         for (int i = 0; i < 1000; i++) {
-            executor.submit(new Thread(new LockRunnable(barrier, fty1LockFactory, i+"LOCK")));
+            executor.submit(new Thread(new LockRunnable(barrier, i+"LOCK")));
         }
 
         executor.shutdown();

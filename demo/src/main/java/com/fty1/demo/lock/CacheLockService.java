@@ -17,23 +17,18 @@ public class CacheLockService {
     public void test() {
 
         String key = "LOCK." + System.currentTimeMillis();
-
+        System.out.println(key);
         Fty1CacheLock lock = fty1LockFactory.buildFty1CacheLock();
-
         if (lock.tryLock(key)) {
-
             log.info("执行业务");
             try {
 
             } catch (Exception e) {
 
             } finally {
-                lock.unLock()
+                lock.unLock();
             }
-
         }
-
-
     }
 
 
