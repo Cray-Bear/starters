@@ -1,5 +1,6 @@
 package com.fty1.lock;
 
+import org.redisson.api.RedissonClient;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
@@ -15,8 +16,8 @@ public class Fty1LockAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public Fty1LockFactory getFty1LockFactory(StringRedisTemplate stringRedisTemplate) {
-        Fty1LockFactory lockFactory = new Fty1LockFactory(stringRedisTemplate);
+    public Fty1LockFactory getFty1LockFactory(RedissonClient redissonClient) {
+        Fty1LockFactory lockFactory = new Fty1LockFactory(redissonClient);
         return lockFactory;
     }
 }

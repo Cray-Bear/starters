@@ -4,7 +4,7 @@ import lombok.NonNull;
 
 import java.util.concurrent.TimeUnit;
 
-public class Fty1DateUtils {
+public class Fty1TimeUnitUtils {
 
     /**
      * Returns the time in milliseconds.

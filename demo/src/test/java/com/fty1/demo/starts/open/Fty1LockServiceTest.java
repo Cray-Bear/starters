@@ -1,6 +1,7 @@
 package com.fty1.demo.starts.open;
 
 import com.fty1.demo.DemoApplicationTests;
+import com.fty1.demo.lock.CacheLockService;
 import com.fty1.lock.Fty1LockFactory;
 import com.fty1.lock.provider.Fty1CacheLock;
 import lombok.extern.slf4j.Slf4j;
@@ -18,23 +19,20 @@ public class Fty1LockServiceTest extends DemoApplicationTests {
     @Autowired
     private Fty1LockFactory fty1LockFactory;
 
+
+    @Autowired
+    private CacheLockService cacheLockService;
+
+
+
+
     @Test
     public void test() {
 
-
-        Fty1CacheLock lock = fty1LockFactory.buildFty1CacheLock();
-
-
-        boolean res = lock.tryLock("789789798789");
-        System.out.println(res);
-        CyclicBarrier barrier = new CyclicBarrier(1000);
-
-        ExecutorService executor = Executors.newFixedThreadPool(1000);
-        for (int i = 0; i < 1000; i++) {
-            executor.submit(new Thread(new LockRunnable(barrier, i+"LOCK")));
+        for (int i = 0; i < 10000; i++) {
+            cacheLockService.test();
         }
-
-        executor.shutdown();
+        // executor.shutdown();
     }
 
 }

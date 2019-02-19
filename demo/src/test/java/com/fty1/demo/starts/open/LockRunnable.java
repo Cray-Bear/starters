@@ -1,9 +1,8 @@
 package com.fty1.demo.starts.open;
 
 import com.fty1.demo.lock.CacheLockService;
+import com.fty1.demo.lock.SpringUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 
 import java.util.concurrent.CyclicBarrier;
 
@@ -14,11 +13,6 @@ public class LockRunnable implements Runnable {
     private CyclicBarrier barrier;
     private String name;
 
-
-    @Autowired
-    private ApplicationContext applicationContext;
-
-
     public LockRunnable(CyclicBarrier barrier, String name) {
         super();
         this.barrier = barrier;
@@ -28,14 +22,16 @@ public class LockRunnable implements Runnable {
     @Override
     public void run() {
 
+
+        CacheLockService cacheLockService = SpringUtil.getBean(CacheLockService.class);
+        log.info(cacheLockService.getClass().getSimpleName());
+        log.info("CyclicBarrier open");
         try {
-            System.out.println(name + " 准备好了...");
-            barrier.await();
+            cacheLockService.test();
         } catch (Exception e) {
-          log.info("CyclicBarrier Exception");
+            log.info("run-",e);
         }
-        CacheLockService cacheLockService =applicationContext.getBean(CacheLockService.class);
-        cacheLockService.test();
+
     }
 
 }
