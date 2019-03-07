@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.fty1.task.config.Fty1TaskAutoConfiguration
