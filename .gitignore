@@ -1,2 +1,10 @@
 /.idea
 /starters.iml
+/*/.mvn
+/task-spring-boot-starter/target/
+/open-spring-boot-starter/target/
+/lock-spring-boot-starter/target/
+/example-spring-boot-starter/target/
+/common-spring-boot-starter/target/
+/center-auth/target/
+/aliyunoss-spring-boot-starter/target/
