@@ -5,6 +5,7 @@ import com.fty1.center.auth.result.sign.SignOutResult;
 import com.fty1.center.auth.result.sign.SignUpResult;
 import com.fty1.common.core.signal.OutSignal;
 import com.fty1.common.core.signal.SignalBuilder;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

@@ -23,7 +23,7 @@
         <dependencies>
             <dependency>
                 <groupId>com.fty1</groupId>
-                <artifactId>starters</artifactId>
+                <artifactId>components</artifactId>
                 <version>1.0-SNAPSHOT</version>
                 <type>pom</type>
                 <scope>import</scope>
@@ -40,36 +40,42 @@
 
     <dependencies>
 
-        <dependency>
-            <groupId>com.fty1</groupId>
-            <artifactId>example-spring-boot-starter</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.fty1</groupId>-->
+            <!--<artifactId>component-example</artifactId>-->
+            <!--<version>1.0-SNAPSHOT</version>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>com.fty1</groupId>-->
+            <!--<artifactId>lock-spring-boot-starter</artifactId>-->
+            <!--<version>1.0-SNAPSHOT</version>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>com.fty1</groupId>-->
+            <!--<artifactId>component-aliyun</artifactId>-->
+            <!--<version>1.0-SNAPSHOT</version>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>com.fty1</groupId>-->
+            <!--<artifactId>component-open</artifactId>-->
+            <!--<version>1.0-SNAPSHOT</version>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>com.fty1</groupId>-->
+            <!--<artifactId>component-task</artifactId>-->
+            <!--<version>1.0-SNAPSHOT</version>-->
+        <!--</dependency>-->
+
 
         <dependency>
             <groupId>com.fty1</groupId>
-            <artifactId>lock-spring-boot-starter</artifactId>
+            <artifactId>component-orm</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-
-        <dependency>
-            <groupId>com.fty1</groupId>
-            <artifactId>aliyunoss-spring-boot-starter</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.fty1</groupId>
-            <artifactId>open-spring-boot-starter</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.fty1</groupId>
-            <artifactId>task-spring-boot-starter</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-
 
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -80,6 +86,11 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

@@ -5,21 +5,20 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.fty1</groupId>
-    <artifactId>starters</artifactId>
+    <artifactId>components</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
-
     <modules>
-        <module>lock-spring-boot-starter</module>
-        <module>open-spring-boot-starter</module>
-        <module>example-spring-boot-starter</module>
-        <module>aliyunoss-spring-boot-starter</module>
+        <module>component-lock</module>
+        <module>component-open</module>
+        <module>component-example</module>
+        <module>component-aliyun</module>
+        <module>component-task</module>
     </modules>
     <dependencyManagement>
         <dependencies>
@@ -59,4 +58,7 @@
             <artifactId>lombok</artifactId>
         </dependency>
     </dependencies>
+    <build>
+        <finalName>components</finalName>
+    </build>
 </project>
